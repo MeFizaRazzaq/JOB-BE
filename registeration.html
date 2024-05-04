@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="registration-container">
+        <h2>Choose Account Type</h2>
+        <div class="registration-options">
+            <button onclick="redirectToEmployeeRegistration()">Register as Employee</button>
+            <button onclick="redirectToEmployerRegistration()">Register as Employer</button>
+        </div>
+    </div>
+
+    <script>
+        function redirectToEmployeeRegistration() {
+            // Redirect user to employee registration page
+            window.location.href = "employee-registration.html";
+        }
+
+        function redirectToEmployerRegistration() {
+            // Redirect user to employer registration page
+            window.location.href = "employer-registration.html";
+        }
+    </script>
+</body>
+</html>
