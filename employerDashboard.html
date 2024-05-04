@@ -65,12 +65,22 @@
                     </div>
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
-                <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a>
+                <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block"   id="post">Post A Job<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
+           
         </nav>
+        <!--Script for profile-->
+    <script>
+        var postJob = document.getElementById("post");
+        postJob.addEventListener("click", function(event) {
+          
+            event.preventDefault();
+            window.location.href = "jobPost.html";
+        });
+    </script>
         <!-- Navbar End -->
 
-<!--Script for edit profile-->
+
 <script>
     // Get the form element
     var editProfileLink = document.getElementById("edit");
