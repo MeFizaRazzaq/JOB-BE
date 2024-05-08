@@ -573,3 +573,8 @@ input[type="file"]:focus {
     background-color: #007653; /* Darker shade of primary color */
     transition: background-color 0.3s ease-in-out;
 }
+
+
+.d{
+    height: 100%;
+}
