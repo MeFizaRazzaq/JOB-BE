@@ -415,12 +415,15 @@
 }
 
 .login-container {
-    max-width: 400px;
-    margin: 50px auto;
+    background-color: #FFFFFF;
+    position: fixed;
+    width: 400px;
+    max-width: 500px;
+    left: 40%;
+    top: 20%;
     padding: 20px;
     border: 1px solid var(--dark);
     border-radius: 5px;
-    background-color: var(--light);
 }
 
 .login-container h2 {
