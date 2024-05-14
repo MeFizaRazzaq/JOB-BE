@@ -31,6 +31,9 @@ const EmployerSchema = new mongoose({
         type: String
     },
     profilePicture: {
+        type: Buffer // Storing the image binary data
+    },
+    profilePictureType: {
         type: String // This can store the URL to the image
     }
 });
