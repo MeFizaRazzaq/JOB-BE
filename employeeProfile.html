@@ -135,10 +135,21 @@
                         <label for="cvResume" class="form-label">CV/Resume</label>
                         <input type="file" class="form-control" id="cvResume" accept=".pdf,.doc,.docx">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                 </form>
             </div>
         </div>
+
+        <script>
+            // Get the form element
+            var submitform = document.getElementById("submit");
+            submitform.addEventListener("click", function(event) {
+                // Prevent default form submission
+                event.preventDefault();
+
+                window.location.href = "employeeDashboard.html";
+            });
+        </script>
         <!-- Profile Building Form End -->
 
 

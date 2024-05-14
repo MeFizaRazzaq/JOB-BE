@@ -49,7 +49,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="index.html" class="nav-item nav-link" id="home" >Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="about.html" class="nav-item nav-link" id="about">About</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
                         <div class="dropdown-menu rounded-0 m-0">
@@ -78,6 +78,16 @@
         event.preventDefault();
 
         window.location.href = "homepage.html";
+    });
+</script>
+
+<script>
+    // Get the form element
+    var aboutpage = document.getElementById("about");
+    aboutpage.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        window.location.href = "testimonial.html";
     });
 </script>
         <!-- Profile Building Form Start -->
@@ -125,10 +135,21 @@
                         <label for="cvResume" class="form-label">CV/Resume</label>
                         <input type="file" class="form-control" id="cvResume" accept=".pdf,.doc,.docx">
                     </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" class="btn btn-primary" id="save">Save Changes</button>
                 </form>
             </div>
         </div>
+
+        <script>
+            // Get the form element
+            var submitsave = document.getElementById("save");
+            submitsave.addEventListener("click", function(event) {
+                // Prevent default form submission
+                event.preventDefault();
+
+                window.location.href = "employeeDashboard.html";
+            });
+        </script>
         <!-- Profile Building Form End -->
 
 
