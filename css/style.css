@@ -578,3 +578,25 @@ input[type="file"]:focus {
 .d{
     height: 100%;
 }
+
+.msga{
+    display: flex;
+    background-color: #1f85df;
+    color: #EEEEEE;
+    margin-top: 12px;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.msgb{
+    display: flex;
+    margin-left: 70%;
+    background-color: #0bb482;
+    color: #EEEEEE;
+    margin-top: 12px;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+}

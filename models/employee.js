@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const EmployerSchema = new mongoose({
+const EmployeeSchema =  mongoose.Schema({
     fullName: {
         type: String,
         required: true
@@ -38,5 +38,5 @@ const EmployerSchema = new mongoose({
     }
 });
 
-const EmployerModel = mongoose.model("Employer", EmployerSchema);
-module.exports = EmployerModel;
+const EmployeeModel = mongoose.model("Employer", EmployeeSchema);
+module.exports = EmployeeModel;
