@@ -14,12 +14,13 @@ const db = mongoose.connection;
 // Set up body parser middleware to parse JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname));
 
 // Route to handle form submission
 app.get('/', (req, res) => {
 
-   
-    res.redirect('login.html');
+    
+    res.sendFile(path.join(__dirname,'homepage.html'));
     console.log("EMployee");
     /*
     const { name, age, position, department, salary } = req.body;
