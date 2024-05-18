@@ -12,15 +12,15 @@
     <div class="container">
         <div class="login-container">
             <h2>Login</h2>
-            <form action="#" method="post">
+            <form id="login-form" action="/login-form" method="post">
                 <div class="col-12 ">
-                    <label for="username">Email</label>
-                    <input type="email" class="form-control" placeholder="Your Email">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Your Email">
                 </div>
                 <br>
                 <div class="col-12">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" placeholder="Your Password here">
+                    <input type="password" name="password" class="form-control" placeholder="Your Password here">
                 </div> <br>
                 <div class="form-group form-check">
                     <input type="checkbox" id="remember" name="remember">
@@ -40,14 +40,7 @@
     </div>
     
 
-    <script>
-        document.getElementById('signup-link').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default behavior of link click
-    
-            // Redirect to the registration page
-            window.location.href = 'registeration.html';
-        });
-    </script>
+    <script src="./index.js"></script>
     
 </body>
 </html>

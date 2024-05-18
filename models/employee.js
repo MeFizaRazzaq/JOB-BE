@@ -2,30 +2,31 @@ const mongoose = require("mongoose");
 
 const EmployeeSchema =  mongoose.Schema({
     fullName: {
-        type: String,
-        required: true
+        type: String
     },
     email: {
         type: String,
         required: true,
         unique: true
     },
-    nationality: {
+    password: {
         type: String,
         required: true
+    },
+    nationality: {
+        type: String
     },
     title: {
-        type: String,
-        required: true
+        type: String
     },
     experience: {
-        type: String,
+        type: String
     },
     skill: {
-        type: String,
+        type: String
     },
     education: {
-        type: String,
+        type: String
     },
     personalWebsite: {
         type: String
@@ -38,5 +39,5 @@ const EmployeeSchema =  mongoose.Schema({
     }
 });
 
-const EmployeeModel = mongoose.model("Employer", EmployeeSchema);
+const EmployeeModel = mongoose.model("employes", EmployeeSchema);
 module.exports = EmployeeModel;
