@@ -46,46 +46,24 @@
             <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
-                        <div class="dropdown-menu rounded-0 m-0">
-                            <a href="job-list.html" class="dropdown-item">Upload a Job</a>
-                            <a href="job-detail.html" class="dropdown-item">Details</a>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu rounded-0 m-0">
-                            <a href="category.html" class="dropdown-item">Job Category</a>
-                            <a href="testimonial.html" class="dropdown-item active">Testimonial</a>
-                        </div>
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
-                </div>
-                
-            </div>
         </nav>
         <!-- Navbar End -->
         <!-- Job Posting Form Start -->
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="container">
                 <h1 class="text-center mb-5">Post a Job</h1>
-                <form>
+                <form action="/jobPost" method="post">
                     <div class="mb-3">
                         <label for="jobTitle" class="form-label">Job Title</label>
-                        <input type="text" class="form-control" id="jobTitle" placeholder="Enter job title" required>
+                        <input type="text" name="jobTitle" class="form-control" id="jobTitle" placeholder="Enter job title" required>
                     </div>
                     <div class="mb-3">
                         <label for="companyName" class="form-label">Company Name</label>
-                        <input type="text" class="form-control" id="companyName" placeholder="Enter company name" required>
+                        <input type="text" name="companyName" class="form-control" id="companyName" placeholder="Enter company name" required>
                     </div>
                     <div class="mb-3">
                         <label for="jobType" class="form-label">Job Type</label>
-                        <select class="form-select" id="jobType" required>
+                        <select name="jobType" class="form-select" id="jobType" required>
                             <option value="">Select job type</option>
                             <option value="full-time">Full Time</option>
                             <option value="part-time">Part Time</option>
@@ -95,15 +73,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="jobDescription" class="form-label">Job Description</label>
-                        <textarea class="form-control" id="jobDescription" rows="5" placeholder="Enter job description" required></textarea>
+                        <textarea class="form-control" name="jobDescription" id="jobDescription" rows="5" placeholder="Enter job description" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="jobLocation" class="form-label">Job Location</label>
-                        <input type="text" class="form-control" id="jobLocation" placeholder="Enter job location" required>
+                        <input type="text" name="jobLocation" class="form-control" id="jobLocation" placeholder="Enter job location" required>
                     </div>
                     <div class="mb-3">
                         <label for="applicationDeadline" class="form-label">Application Deadline</label>
-                        <input type="date" class="form-control" id="applicationDeadline" required>
+                        <input type="date" name="applicationDeadline" class="form-control" id="applicationDeadline" required>
                     </div>
                     <button type="submit" class="btn btn-primary" id="submit">Submit</button>
                 </form>

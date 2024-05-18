@@ -4,6 +4,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const EmployeeModel= require('./models/employee');
 const EmployerModel=require('./models/employer');
+const JObModel=require('./models/jobSchema');
+const jobModel = require('./models/jobSchema');
 
 // Create Express app
 const app = express();
@@ -55,8 +57,6 @@ newEmployee.save((err, savedEmployee) => {
 
 //form registration for employeee
 app.post('/Employee-Register',async (req, res) => {
-    
-
     try {
         const newRegistration = new EmployeeModel({
             email: req.body.email,
@@ -117,6 +117,29 @@ app.post('/login-form',async (req, res) => {
     }
 });
 
+//job post form for employeer
+app.post('/jobPost',async (req, res) => {
+    console.log("JOB",req.body);
+    try {
+        const newJob = new jobModel({
+            jobTitle: req.body.jobTitle,
+            companyName: req.body.companyName,
+            jobType: req.body.jobType,
+            jobDescription: req.body.jobDescription,
+            location: req.body.jobLocation,
+            date: req.body.applicationDeadline,
+        });
+
+        await newJob.save();  // Use async/await instead of a callback
+        //res.send('Registration successful');
+        res.sendFile(path.join(__dirname,'employerDashboard.html'));
+    } catch (err) {
+        if (!res.headersSent) {  // Check if headers are already sent
+            res.status(500).send('Error occurred while saving to database');
+        }
+    }
+});
+
 // Start the server
 app.listen(port, () => {
 console.log(`Server is listening at http://localhost:${port}`);
@@ -130,7 +153,7 @@ const SearchOneEmployee= async  (email,p)=>{
 
         console.log("employee",emp.password);
         if(emp.password==p){
-            return emp;
+            return emp; 
         }else{
             return null;
         }

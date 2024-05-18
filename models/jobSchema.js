@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 
-const EmployerSchema = new mongoose.Schema({
+const jobSchema = new mongoose.Schema({
     jobTitle: {
         type: String,
         required: true
     },
     companyName: {
         type: String,
-        required: true,
         unique: true
     },
     jobType: {
@@ -26,5 +25,5 @@ const EmployerSchema = new mongoose.Schema({
     }
 });
 
-const EmployerModel = mongoose.model("Employer", EmployerSchema);
-module.exports = EmployerModel;
+const jobModel = mongoose.model("Job", jobSchema);
+module.exports = jobModel;
