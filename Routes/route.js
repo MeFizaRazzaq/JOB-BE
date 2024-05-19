@@ -9,6 +9,10 @@ const jobModel = require('../models/jobSchema');
 const Employee = require('../js/components');
 const ChattModel= require('../models/chatting');
 
+// Route to render login page
+router.get('/login', (req, res) => {
+    res.render('login');  // This will render login.ejs from your views directory
+});
 
 //global user
 let emp= new Employee();
@@ -78,7 +82,7 @@ router.post('/Employee-Profile',async (req, res) => {
 //dashboard for employee
 router.get('/Employee-Dash',async (req, res) => {
     try {  
-        a="FOZA";
+        a="FIZA RAZZAQ";
         res.render('employeeDashboard',{a});
     } catch (err) {
         if (!res.headersSent) {  // Check if headers are already sent
@@ -101,14 +105,33 @@ router.get('/Employer-Register',async (req, res) => {
 //registration form for employeer
 router.post('/Employer-Register',async (req, res) => {
     try {
-        const newRegistration = new EmployerModel({
+        
+        const newempRegistration = new EmployerModel({
             email: req.body.email,
             password: req.body.password
         });
-
-        await newRegistration.save();  // Use async/await instead of a callback
+        console.log("employeer reg",newempRegistration);
+        await newempRegistration.save();  // Use async/await instead of a callback
         //res.send('Registration successful');
-        res.sendFile(path.join(__dirname,'employerProfile.html'));
+        res.render('employerProfile');
+    } catch (err) {
+        if (!res.headersSent) {  // Check if headers are already sent
+            res.status(500).send('Error occurred while saving to database');
+        }
+    }
+});
+
+//BUild Profile for employee
+router.post('/Employer-Profile',async (req, res) => {
+    try {
+        console.log("req",req.body);
+        mail=req.body.email;
+        a=req.body.name;
+        console.log("n,e",a,mail);
+        let employee = await SearchOneEmployee(mail,a);
+        //emp.upd_name(mail,a);
+        let employeeupd = await EmployeeModel.findOneAndUpdate({ mail },{a});
+        res.render('employerDashboard',{a});
     } catch (err) {
         if (!res.headersSent) {  // Check if headers are already sent
             res.status(500).send('Error occurred while saving to database');
@@ -203,6 +226,47 @@ const vpass= (e,p)=>{
         }
 }
 
+//about page
+router.get('/testimonial',async (req, res) => {
+    try {     
+        res.render('testimonial');
+    } catch (err) {
+        if (!res.headersSent) {  // Check if headers are already sent
+            res.status(500).send('Error occurred while saving to database');
+        }
+    }
+});
 
+//edit profile page
+router.get('/edit-Profile-Employee',async (req, res) => {
+    try {     
+        res.render('employeeEDITprofile');
+    } catch (err) {
+        if (!res.headersSent) {  // Check if headers are already sent
+            res.status(500).send('Error occurred while saving to database');
+        }
+    }
+});
 
+//edit profile page
+router.get('/Employee-Payment',async (req, res) => {
+    try {     
+        res.render('employeePaymentDetails');
+    } catch (err) {
+        if (!res.headersSent) {  // Check if headers are already sent
+            res.status(500).send('Error occurred while saving to database');
+        }
+    }
+});
+
+//contact us page
+router.get('/Contact',async (req, res) => {
+    try {     
+        res.render('contact');
+    } catch (err) {
+        if (!res.headersSent) {  // Check if headers are already sent
+            res.status(500).send('Error occurred while saving to database');
+        }
+    }
+});
 module.exports = router;

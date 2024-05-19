@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-
+const Schema = mongoose.Schema;
 // Chat model
-const chatSchema = new Schema({
+const chatSchema =  Schema({
     employee: {
         type: Schema.Types.ObjectId,
         ref: 'EmployeeModel',
@@ -33,4 +33,4 @@ const chatSchema = new Schema({
 
 const ChatModel = mongoose.model('Chat', chatSchema);
 
-module.exports = EmployerModel;
+module.exports = ChatModel;
