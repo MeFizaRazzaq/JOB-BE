@@ -6,6 +6,7 @@ const EmployeeModel= require('./models/employee');
 const EmployerModel=require('./models/employer');
 const JObModel=require('./models/jobSchema');
 const jobModel = require('./models/jobSchema');
+const Employee = require('./js/components');
 
 // Create Express app
 const app = express();
@@ -23,34 +24,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname));
 
+//code to implement modules
+/*classes
+class Employee{
+    constructor(mail,pass){
+        this.email=mail;
+        this.password=pass;
+    }
+    set_Profile(){
+        console.log("Do Nothing");
+    }
+}*/
+
+//global user
+let emp= new Employee();
+
 // Route to handle form submission
 app.get('/', (req, res) => {
-
-    
     res.sendFile(path.join(__dirname,'homepage.html'));
     console.log("EMployee");
-    /*
-    const { name, age, position, department, salary } = req.body;
- // Create a new Employee instance
- const newEmployee = new EmployeeModel({
-    name,
-    age,
-    position,
-    department,
-    salary
-});
-
-// Save the employee to the database
-newEmployee.save((err, savedEmployee) => {
-    if (err) {
-        console.error(err);
-        res.status(500).send('Error saving employee');
-    } else {
-        res.status(200).send('Employee saved successfully');
-    }
-});
-
-*/
 });
 
 
@@ -96,10 +88,12 @@ app.post('/login-form',async (req, res) => {
     
     try {
             const e= await SearchOneEmployee(req.body.email,req.body.password);
-            console.log("e",e);
+            //console.log("e",e);
+            emp=e;
+            console.log("emp",emp);
             if(e==null){
                 const er= await SearchOneEmployeer(req.body.email,req.body.password);
-                console.log("er",er);
+                //console.log("er",er);
                 if(er==null){
                     res.sendFile(path.join(__dirname,'login.html'));
                 }else{
@@ -107,6 +101,7 @@ app.post('/login-form',async (req, res) => {
                 }
                 
             }else{
+                //res.render('employeeDashboard');
                 res.sendFile(path.join(__dirname,'employeeDashboard.html'));
             }
             
@@ -180,3 +175,5 @@ const SearchOneEmployeer= async  (e,p)=>{
         return null;
     }
 }
+
+

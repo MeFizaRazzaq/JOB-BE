@@ -1,4 +1,4 @@
-// Define the Employee class
+/* Define the Employee class
 class Employee {
     // Constructor to initialize employee properties
     constructor(name, age, position, department, salary) {
@@ -18,3 +18,16 @@ class Employee {
         console.log("Salary: $" + this.salary);
     }
 }
+*/
+//classes
+const emp =class Employee{
+    constructor(mail,pass){
+        this.email=mail;
+        this.password=pass;
+    }
+    set_Profile(){
+        console.log("Do Nothing");
+    }
+}
+
+module.exports=emp;
