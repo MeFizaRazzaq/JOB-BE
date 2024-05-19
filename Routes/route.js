@@ -7,11 +7,8 @@ const EmployerModel=require('../models/employer');
 const JObModel=require('../models/jobSchema');
 const jobModel = require('../models/jobSchema');
 const Employee = require('../js/components');
+const ChattModel= require('../models/chatting');
 
-// Route to render login page
-router.get('/login', (req, res) => {
-    res.render('login');  // This will render login.ejs from your views directory
-});
 
 //global user
 let emp= new Employee();
@@ -23,8 +20,23 @@ router.get('/', (req, res) => {
     console.log("EMployee");
 });
 
+// Route to handle registration choice
+router.get('/register_choice', (req, res) => {
+    res.render('register_choice');
+    //res.sendFile(path.join(__dirname,'homepage.html'));
+    console.log("EMployee");
+});
 
-
+//form registration for employeee
+router.get('/Employee-Register',async (req, res) => {
+    try {
+        res.render('employee-registration')
+    } catch (err) {
+        if (!res.headersSent) {  // Check if headers are already sent
+            res.status(500).send('Error occurred while saving to database');
+        }
+    }
+});
 
 //form registration for employeee
 router.post('/Employee-Register',async (req, res) => {
@@ -36,7 +48,49 @@ router.post('/Employee-Register',async (req, res) => {
 
         await newRegistration.save();  // Use async/await instead of a callback
         //res.send('Registration successful');
-        res.sendFile(path.join(__dirname,'employeeProfile.html'));
+        emp=newRegistration;
+        res.render('employeeProfile',{newRegistration});
+    } catch (err) {
+        if (!res.headersSent) {  // Check if headers are already sent
+            res.status(500).send('Error occurred while saving to database');
+        }
+    }
+});
+
+//BUild Profile for employee
+router.post('/Employee-Profile',async (req, res) => {
+    try {
+        console.log("req",req.body);
+        mail=req.body.email;
+        a=req.body.name;
+        console.log("n,e",a,mail);
+        let employee = await SearchOneEmployee(mail,a);
+        //emp.upd_name(mail,a);
+        let employeeupd = await EmployeeModel.findOneAndUpdate({ mail },{a});
+        res.render('employeeDashboard',{a});
+    } catch (err) {
+        if (!res.headersSent) {  // Check if headers are already sent
+            res.status(500).send('Error occurred while saving to database');
+        }
+    }
+});
+
+//dashboard for employee
+router.get('/Employee-Dash',async (req, res) => {
+    try {  
+        a="FOZA";
+        res.render('employeeDashboard',{a});
+    } catch (err) {
+        if (!res.headersSent) {  // Check if headers are already sent
+            res.status(500).send('Error occurred while saving to database');
+        }
+    }
+});
+
+//registration form for employeer
+router.get('/Employer-Register',async (req, res) => {
+    try {     
+        res.render('employer-registration');
     } catch (err) {
         if (!res.headersSent) {  // Check if headers are already sent
             res.status(500).send('Error occurred while saving to database');
@@ -63,20 +117,21 @@ router.post('/Employer-Register',async (req, res) => {
 });
 
 //registration form for employeer
-router.post('/login-form',async (req, res) => {
-    
+router.post('/login-form',async (req, res) => {   
     try {
-            const e= await SearchOneEmployee(req.body.email,req.body.password);
+            const em= await SearchOneEmployee(req.body.email);
             //console.log("e",e);
-            emp=e;
+            const e=vpass(em.password,req.body.password);
+            emp=em;
             console.log("emp",emp);
             if(e==null){
-                const er= await SearchOneEmployeer(req.body.email,req.body.password);
+                const emr= await SearchOneEmployeer(req.body.email,req.body.password);
                 //console.log("er",er);
+                const er=vpass(emr.password,req.body.password);
                 if(er==null){
-                    res.sendFile(path.join(__dirname,'login.html'));
+                    res.render('login');
                 }else{
-                    res.sendFile(path.join(__dirname,'employerDashboard.html'));
+                    res.render('employerDashboard');
                 }
                 
             }else{
@@ -116,19 +171,12 @@ router.post('/jobPost',async (req, res) => {
 });
 
 
-const SearchOneEmployee= async  (email,p)=>{
-    console.log("employee mai:",email,p);
+const SearchOneEmployee= async  (email)=>{
+    console.log("employee mai:",email);
     let emp = await EmployeeModel.findOne({ email: email });
-    console.log("e in func",emp);
     if(emp!=null){
-
-        console.log("employee",emp.password);
-        if(emp.password==p){
-            return emp; 
-        }else{
-            return null;
-        }
-           
+        console.log("seached employee",emp);
+        return emp;   
     }else{
         console.log("employee not found");
         return null;
@@ -139,19 +187,21 @@ const SearchOneEmployeer= async  (e,p)=>{
     let emp = await EmployerModel.findOne({ email: e });
     console.log("employeer",emp);
     if(emp!=null){
-        console.log("employee",emp.password);
-        if(emp.password==p){
-            return emp;
-        }else{
-            return null;
-        }
-           
+        console.log("seached employee",emp);
+        return emp;   
     }else{
-        console.log("employer not found");
+        console.log("employee not found");
         return null;
     }
 }
 
+const vpass= (e,p)=>{  
+        if(e==p){
+            return true; 
+        }else{
+            return false;
+        }
+}
 
 
 
